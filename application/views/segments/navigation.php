@@ -33,13 +33,17 @@
                         -->
                         
                         <li >
-                            <a class="active" href="<?=site_url('create_location');?>"><i class="fa fa-dashboard fa-fw"></i> Create Location</a>
+                            <a class="active" href="<?=site_url('welcome');?>"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="<?=site_url('create_location');?>"><i class="fa fa-table fa-fw"></i> Create Location</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
+                        </li>
+                        
+                        <li>
+                            <a href="<?=site_url('assign_location');?>"><i class="fa fa-table fa-fw"></i> Assign Location to Item</a>
                         </li>
 
                     </ul>

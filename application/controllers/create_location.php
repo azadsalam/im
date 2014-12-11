@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Create_location extends CI_Controller {
+class Create_location extends CI_Controller 
+{
 
 	/**
 	 * Index Page for this controller.
@@ -19,6 +20,7 @@ class Create_location extends CI_Controller {
 	 */
 	public function index()
 	{
+
 		$this->load->view('create_location');
 	}
 	
@@ -47,19 +49,21 @@ class Create_location extends CI_Controller {
 		
 			if ($this->location->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 			{
-				redirect('create_location/success');   // or whatever logic needs to occur
+				$this->success($form_data['name']);
+				//redirect('create_location/success');   // or whatever logic needs to occur
 			}
 			else
 			{
-				echo 'An error occurred saving your information. Please try again later';
+				redirect('failure');
 				// Or whatever error handling is necessary
 			}
 		}
 	}
-	function success()
+	function success($location)
 	{
-			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
-			sessions have not been used and would need to be added in to suit your app';
+		$data['msg'] = "Succesfully Created ".$location;
+		$this->load->view('create_location',$data);
+		
 	}
 	
 	function location_exists($location)

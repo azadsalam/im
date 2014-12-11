@@ -42,8 +42,10 @@ class Location extends CI_Model {
 	    }
 	    else{
 	        return false;
-	    }
-		
+	    }	
 	}
+	
+
+	
 }
 ?>

@@ -6,6 +6,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                    	<h2>
+                    	<?php if(isset($msg))
+                    			echo $msg;
+                    	?>
+                    	</h2>
+                    
                         <h1 class="page-header">CREATE NEW LOCATION</h1>
                         <?php // Change the css classes to suit your needs    
 
