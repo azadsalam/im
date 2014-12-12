@@ -33,10 +33,10 @@ class Item extends CI_Model {
 			$this->db->where('id',$id);
 			$this->db->update('item',$data);
 			
-			return TRUE;
+			return $name;
 		}
 		
-		return FALSE;
+		return NULL;
 	}
 	
 	/*function itemsInLocation($locationId)
@@ -44,9 +44,58 @@ class Item extends CI_Model {
 		$this->db->select('id','type_id','');
 	}*/
 	
-	/*function getItem($id)
+	function getItemIdByName($name)
 	{ 
+		$this->db->select('id');
+		$this->db->where('name',$name);
+		$q = $this->db->get('item');
 		
-	}*/
+		if($q->num_rows()>0)
+		{
+			return $q->row()->id;
+		}
+		else
+			return NULL;
+	}
+	
+	function getAllByName($name)
+	{
+		//$this->db->select('id','name');
+		$this->db->where('name',$name);
+		$q = $this->db->get('item');
+		
+		//print_r ($q);
+		//print_r ($q->result());
+		
+		//echo $q->num_rows();
+		if($q->num_rows()>0)
+		{
+			return $q->row_array();
+			//print_r($data);
+		}
+		else return NULL;
+	}
+	
+	function get_name($id)
+	{
+		$this->db->select('name');
+		$this->db->where('id',$id);
+		$q = $this->db->get('item');
+		
+		if($q->num_rows()>0)
+			return $q->row()->name;
+	    else 
+			return NULL; 
+	}
+	function set_location($id,$location)
+	{	
+		$this->db->where('id',$id);
+		$this->db->set('lname',$location);
+		$q = $this->db->update('item');
+		if($this->db->affected_rows()==1)
+			return TRUE;
+		else 
+			return FALSE;
+	}
 }
 ?>

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">SUCCESS</h1>
-                        <p><?php echo message;?></p>
+                        <p><?php if(isset($message))echo $message;?></p>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

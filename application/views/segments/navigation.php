@@ -45,6 +45,11 @@
                         <li>
                             <a href="<?=site_url('assign_location');?>"><i class="fa fa-table fa-fw"></i> Assign Location to Item</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
+                        </li>
+                        
 
                     </ul>
                 </div>

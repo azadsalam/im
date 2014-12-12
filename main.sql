@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS im;
 
 
 DROP TABLE IF EXISTS loc_per;
-DROP TABLE IF EXISTS location_assignment;
+DROP TABLE IF EXISTS location_assignment_request;
 DROP TABLE  IF EXISTS person;
 DROP TABLE  IF EXISTS item;
 DROP TABLE  IF EXISTS types;
@@ -53,18 +53,29 @@ CREATE TABLE item
 			ON UPDATE CASCADE
 );
 
-CREATE TABLE location_assignment
+CREATE TABLE location_assignment_request
 (
-	iid INT,
+	id INT AUTO_INCREMENT,
+	item_id INT NOT NULL,
+    pid INT NOT NULL,
 	old_location CHAR(50),
 	new_location CHAR(50),
-	status CHAR(50),
+	status CHAR(50) NOT NULL DEFAULT 'PENDING',	
 	
-	FOREIGN KEY(iid)
+    PRIMARY KEY(id),
+
+	FOREIGN KEY(item_id)
 		REFERENCES item(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
-			
+
+	FOREIGN KEY(pid)
+		REFERENCES person(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+    
+
+
 	FOREIGN KEY(old_location)
 		REFERENCES location(name)
 			ON DELETE CASCADE

@@ -45,6 +45,21 @@ class Location extends CI_Model {
 	    }	
 	}
 	
+	function get_locations()
+	{
+		$this->db->select('name');
+		$q = $this->db->get('location');
+		if($q->num_rows()>0)
+		{
+			foreach($q->result() as $row)
+			{
+				$data[$row->name] = $row->name;
+			}
+			return $data;
+		}
+		else return NULL;
+	}
+	
 
 	
 }

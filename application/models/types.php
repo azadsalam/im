@@ -45,5 +45,13 @@ class Types extends CI_Model {
 		$q = $this->db->get('types');
 		return $q->row()->code;
 	}
+	
+	function get_name($id)
+	{
+		$this->db->select('name');
+		$this->db->where('id',$id);
+		$q = $this->db->get('types');
+		return $q->row()->name;
+	}
 }
 ?>

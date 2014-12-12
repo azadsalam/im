@@ -70,11 +70,12 @@ class Item_entry extends CI_Controller
 					
 			// run insert model to write data to db
 			//print_r($form_data);
-						
-			if ($this->item->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
+
+			$name = $this->item->SaveForm($form_data);			
+			if (isset($name)) // the information has therefore been successfully saved in the db
 			{
 				//redirect('item_entry/success');   // or whatever logic needs to occur
-				$this->success(" ");
+				$this->success($name);
 			}
 			else
 			{
