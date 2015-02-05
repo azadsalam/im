@@ -53,15 +53,6 @@ CREATE TABLE item
 			ON UPDATE CASCADE
 );
 
-
-CREATE TABLE person
-(
-	id INT NOT NULL AUTO_INCREMENT,
-	name CHAR(50),
-	role CHAR(30),
-	PRIMARY KEY(id)
-);
-
 CREATE TABLE location_assignment_request
 (
 	id INT AUTO_INCREMENT,
@@ -95,6 +86,14 @@ CREATE TABLE location_assignment_request
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 	
+);
+
+CREATE TABLE person
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	name CHAR(50),
+	role CHAR(30),
+	PRIMARY KEY(id)
 );
 
 
