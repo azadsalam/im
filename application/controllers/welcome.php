@@ -23,27 +23,6 @@ class Welcome extends CI_Controller {
 		redirect_if_not_logged_in();
 		$this->load->view('welcome_message');
 		
-				$this->load->library('grocery_CRUD');
-				try{
-			$crud = new grocery_CRUD();
-
-			$crud->set_theme('datatables');
-			$crud->set_table('location');
-			//$crud->set_subject('Location');
-			//$crud->required_fields('name');
-			//$crud->columns('name','room_no','description');
-
-			 $output = $crud->render();
-			//print_r($output);
-			 echo $output->output;
-
-//			$this->_example_output($output);
-
-		}catch(Exception $e){
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
-				
-		
 	}
 }
 
