@@ -36,8 +36,16 @@
                             <a class="active" href="<?=site_url('welcome');?>"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('create_location');?>"><i class="fa fa-table fa-fw"></i> Create Location</a>
+                            <a href="<?=site_url('locations');?>"><i class="fa fa-table fa-fw"></i> Manage Locations</a>
                         </li>
+                        <li>
+                            <a href="<?=site_url('types');?>"><i class="fa fa-table fa-fw"></i> Manage Types</a>
+                        </li>
+                        
+                        <li>
+                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show Items</a>
+                        </li>
+                        
                         <li>
                             <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
                         </li>
@@ -50,9 +58,11 @@
                             <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
                         </li>
                         
+                        
 						<li>
                             <a href="<?=site_url('login/logout');?>"><i class="fa fa-table fa-fw"></i> Log Out</a>
                         </li>
+                        
                         
 					
                     </ul>

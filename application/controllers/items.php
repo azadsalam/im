@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Types extends CI_Controller {
+class Items extends CI_Controller {
 
 	public function __construct()
 	{
@@ -37,30 +37,51 @@ class Types extends CI_Controller {
 		{
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
-			$crud->set_table('types');
-			$crud->set_subject('Type');
-			$crud->display_as('pid','Parent Type');
-			//$crud->required_fields('city');
-			$crud->required_fields('name','code');
-			$crud->set_rules('code','Code','trim|required|min_length[2]|max_length[4]|xss_clean');
-			$crud->set_rules('name','Name','trim|required|max_length[30]|xss_clean');
-			$crud->set_rules('description','Description','trim|required|xss_clean');
-			$crud->set_relation('pid','types','name');
+			$crud->set_table('item');
+			$crud->required_fields('type_id','name','lname');
 			
-			$crud->columns('id','name','code','description','pid');
+			$crud->unset_add();
+            $crud->unset_edit();
+            
+            $crud->display_as('type_id','Type');
+            $crud->display_as('lname','Location');
+            
+			/*$crud->set_primary_key('name');
+			$crud->set_subject('Location');
+			$crud->field_type('description', 'textarea');
+			
+			$crud->set_rules('name','Name','trim|required|max_length[50]|xss_clean|alpha_dash||callback_location_exists');
+			$crud->set_rules('room_no','Room No','numeric|trim|xss_clean');
+			*/
+			//$crud->columns('name','description');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
+			$crud->set_relation('type_id','types','name');
+			$crud->set_relation('lname','location','name');
  			$output = $crud->render();
 
-			$this->load->view('types_view',$output);
+			$this->load->view('items_view',$output);
 			
 		}
 		catch(Exception $e)
 		{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-			$this->load->view('types_view',(object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
+			$this->load->view('items_view',(object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 		}
 		
+	}
+	function location_exists($location)
+	{
+		$this->load->model('location');
+		if($this->location->location_exists($location))
+		{
+			$this->form_validation->set_message('location_exists', 'This location already exists');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 	/*function add_name_callback()
 	{
