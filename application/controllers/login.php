@@ -50,7 +50,7 @@ class Login extends CI_Controller {
 			$pass = $this->input->post('pass');
 
 			
-			if($un=='admin' && $pass=='pass')
+			if($un=='admin' && $pass=='RSAS')
 			{
 				$this->session->set_userdata('username',$un);
 				$this->session->set_userdata('priviledge','admin');
@@ -59,7 +59,7 @@ class Login extends CI_Controller {
 				$data['message']="Welcome ".$un;
 				$this->load->view('success',$data);
 			}
-			else if($un=='user' && $pass=='pass')
+			else if($un=='user' && $pass=='RSAS')
 			{
 				$this->session->set_userdata('username',$un);
 				$this->session->set_userdata('priviledge','user');
