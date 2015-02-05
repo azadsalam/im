@@ -7,11 +7,11 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$pid = $this->session->userdata('pid');
 		
-		if($pid!=false)
+/*		if($pid!=false)
 		{
 			//logged in 
 		}
-		
+*/		
 		//echo $pid;
 	}
 	/**
@@ -73,6 +73,14 @@ class Login extends CI_Controller {
 				$this->load->view('login_view',$data);
 			}
 		}
+	}
+	
+	function logout()
+	{
+		$array_items = array('username' => '', 'priviledge' => '','pid' => '');
+		$this->session->unset_userdata($array_items);
+		$data['msg'] = "You Have been logged out";
+		$this->load->view('login_view',$data);
 	}
 }
 

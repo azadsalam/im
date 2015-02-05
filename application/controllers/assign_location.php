@@ -5,14 +5,9 @@ class Assign_location extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$pid = $this->session->userdata('pid');
 		
-		if($pid==false)
-		{
-			//logged in
-			redirect('login'); 
-		}
-		
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
 		//echo $pid;
 	}
 	/**

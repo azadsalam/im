@@ -2,6 +2,15 @@
 
 class Create_location extends CI_Controller 
 {
+	
+	function __construct()
+	{
+		parent::__construct();
+		
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
+		//echo $pid;
+	}
 
 	/**
 	 * Index Page for this controller.

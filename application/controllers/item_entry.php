@@ -3,6 +3,14 @@
 class Item_entry extends CI_Controller 
 {
 
+	function __construct()
+	{
+		parent::__construct();
+		
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
+		//echo $pid;
+	}
 	/**
 	 * Index Page for this controller.
 	 *

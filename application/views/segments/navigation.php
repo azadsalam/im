@@ -50,7 +50,11 @@
                             <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
                         </li>
                         
-
+						<li>
+                            <a href="<?=site_url('login/logout');?>"><i class="fa fa-table fa-fw"></i> Log Out</a>
+                        </li>
+                        
+					
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
