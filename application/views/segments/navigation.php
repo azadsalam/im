@@ -43,9 +43,15 @@
                         </li>
                         
                         <li>
-                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show Items</a>
+                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show All Items</a>
                         </li>
-                        
+                        <li>
+                            <a href="<?=site_url('unassigned_items');?>"><i class="fa fa-table fa-fw"></i> Show Unassigned Items</a>
+                        </li>
+                        <li>
+                            <a href="<?=site_url('items_location');?>"><i class="fa fa-table fa-fw"></i> Items Per Location</a>
+                        </li>
+                     
                         <li>
                             <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
                         </li>

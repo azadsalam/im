@@ -23,6 +23,8 @@ CREATE TABLE types
 			ON UPDATE CASCADE
 );
 
+ALTER TABLE types ADD count INT NOT NULL DEFAULT '0' AFTER code;
+--ALTER TABLE item ADD UNIQUE(name);
 
 CREATE TABLE location
 (

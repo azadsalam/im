@@ -12,4 +12,10 @@ if ( ! function_exists('test_method'))
 			redirect('login');
 		}
     }   
+    
+    function get_priviledge_level()
+    {
+    	$CI = &get_instance();
+		return $CI->session->userdata('priviledge');
+    }
 }

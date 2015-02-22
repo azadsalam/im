@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Items extends CI_Controller {
+class Unassigned_items extends CI_Controller {
 
 	public function __construct()
 	{
@@ -41,14 +41,16 @@ class Items extends CI_Controller {
 			$crud->required_fields('type_id','name','lname');
 			
 			
-//			$crud->where('lname','IAC-YO');
+			$crud->where('lname',NULL);
 			$crud->unset_add();
-			
+
 			//if(get_priviledge_level() != 'admin')
             $crud->unset_edit();
             
+            
             $crud->display_as('type_id','Type');
-            $crud->display_as('lname','Location');
+            //$crud->display_as('lname','Location');
+            
             
 			/*$crud->set_primary_key('name');
 			$crud->set_subject('Location');
@@ -62,9 +64,10 @@ class Items extends CI_Controller {
 			
 			$crud->set_relation('type_id','types','name');
 			$crud->set_relation('lname','location','name');
- 			$output = $crud->render();
+ 			$crud->columns('type_id','name','make','description','purchase_date');
+			$output = $crud->render();
 
-			$this->load->view('items_view',$output);
+			$this->load->view('unassigned_items_view',$output);
 			
 		}
 		catch(Exception $e)

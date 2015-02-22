@@ -53,5 +53,18 @@ class Types extends CI_Model {
 		$q = $this->db->get('types');
 		return $q->row()->name;
 	}
+	function get_count($id)
+	{
+		$this->db->select('count');
+		$this->db->where('id',$id);
+		$q = $this->db->get('types');
+		return $q->row()->count;
+	}
+	function increment_count($id)
+	{
+		$this->db->set('count', 'count+1', FALSE);
+		$this->db->where('id', $id);
+		$this->db->update('types');
+	}
 }
 ?>
