@@ -32,7 +32,7 @@ class Items extends CI_Controller {
 		$this->load->helper('auth_helper');
 		redirect_if_not_logged_in();
 		
-		
+		//echo "HER";
 		try
 		{
 			$crud = new grocery_CRUD();
@@ -46,6 +46,9 @@ class Items extends CI_Controller {
 			
 			//if(get_priviledge_level() != 'admin')
             $crud->unset_edit();
+
+            $crud->callback_column($this->unique_field_name('lname'),array($this,'blankFormatting'));
+           // $crud->callback_column('lname',array($this,'blankFormatting'));
             
             $crud->display_as('type_id','Type');
             $crud->display_as('lname','Location');
@@ -73,6 +76,21 @@ class Items extends CI_Controller {
 			$this->load->view('items_view',(object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 		}
 		
+	}
+	
+	
+	function unique_field_name($field_name) 
+	{
+	    return 's'.substr(md5($field_name),0,8); //This s is because is better for a string to begin with a letter and not with a number
+    }
+	 
+	function blankFormatting($value, $row)
+	{
+		//echo "here";
+		if(!isset($value) || empty($value)) 
+			return 'NO LOCATION';
+		else 
+			return $value;	
 	}
 	function location_exists($location)
 	{

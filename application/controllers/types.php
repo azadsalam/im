@@ -44,12 +44,13 @@ class Types extends CI_Controller {
 			$crud->required_fields('name','code');
 			$crud->set_rules('code','Code','trim|required|min_length[2]|max_length[4]|xss_clean');
 			$crud->set_rules('name','Name','trim|required|max_length[30]|xss_clean');
-			$crud->set_rules('description','Description','trim|required|xss_clean');
+			$crud->set_rules('description','Description','trim|xss_clean');
 			$crud->set_relation('pid','types','name');
 			
-			$crud->columns('id','name','code','description','pid');
+			$crud->columns('id','name','code','count','description','pid');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
+			$crud->unset_edit();
  			$output = $crud->render();
 
 			$this->load->view('types_view',$output);
