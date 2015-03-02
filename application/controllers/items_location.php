@@ -2,6 +2,7 @@
 
 class Items_location extends CI_Controller {
 
+	public $lname='';
 	public function __construct()
 	{
 		parent::__construct();
@@ -33,21 +34,22 @@ class Items_location extends CI_Controller {
 		redirect_if_not_logged_in();
 		
 		$this->load->helper('form');
-		$this->form_validation->set_rules('lname', 'Location', 'required|trim|xss_clean');			
-			
+		$this->form_validation->set_rules('lname', 'Location', 'required|trim|xss_clean');						
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 	
-		$lname=NULL;
+		$this->lname = NULL;
 		if ($this->form_validation->run() == TRUE) // validation hasn't been passed
 		{
-			$lname = $this->input->post('lname');
+			$this->lname = $this->input->post('lname');
 		}
 
+//		echo $this->lname;
+//		$this->load->view('items_location_view_part1',array('lname'=>$lname));
  		//$data['output']=NULL;
 		$output=NULL;
 		try
 		{
-			if(isset($lname))
+			if(isset($this->lname))
 			{
 				$crud = new grocery_CRUD();
 				$crud->set_theme('datatables');
@@ -56,7 +58,9 @@ class Items_location extends CI_Controller {
 				$crud->required_fields('type_id','name','lid');
 				
 				$this->load->model('location');
-				$crud->where('lid',$this->location->get_location_id($lname));
+				$lid = $this->location->get_location_id($this->lname);
+				//echo $lid;
+				$crud->where('lid',$lid);
 				$crud->unset_add();
 			
 				//if(get_priviledge_level() != 'admin')
@@ -86,6 +90,7 @@ class Items_location extends CI_Controller {
 			//print_r($output);
 			//$output['location_list']=array(1,2,3);
 			
+
 			$this->load->view('items_location_view',$output);
 			
 		}
@@ -97,6 +102,10 @@ class Items_location extends CI_Controller {
 		
 	}
 	
+	function get_lname()
+	{
+		return $this->lname;
+	}
 	function get_locations()
 	{
 		$this->load->model('location');

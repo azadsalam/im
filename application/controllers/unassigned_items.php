@@ -62,9 +62,14 @@ class Unassigned_items extends CI_Controller {
 			//$crud->columns('name','description');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
+            
 			$crud->set_relation('type_id','types','name');
 			//$crud->set_relation('lname','location','name');
- 			$crud->columns('type_id','name','make','description','purchase_date');
+ 
+            $crud->columns('name','type_id','make','purchase_date','lid','description');
+ 			
+ 			$crud->add_action('Assign Location', '', 'assign_location/from_gc','ui-icon-image');
+ 			
 			$output = $crud->render();
 
 			$this->load->view('unassigned_items_view',$output);
@@ -90,6 +95,9 @@ class Unassigned_items extends CI_Controller {
 			return TRUE;
 		}
 	}
+	
+	
+
 	/*function add_name_callback()
 	{
 		

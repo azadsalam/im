@@ -60,9 +60,10 @@ class Items extends CI_Controller {
 			$crud->set_rules('name','Name','trim|required|max_length[50]|xss_clean|alpha_dash||callback_location_exists');
 			$crud->set_rules('room_no','Room No','numeric|trim|xss_clean');
 			*/
-			//$crud->columns('name','description');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
+            $crud->columns('name','type_id','make','purchase_date','lid','description');
+            
 			$crud->set_relation('type_id','types','name');
 			$crud->set_relation('lid','location','name');
  			$output = $crud->render();

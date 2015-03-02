@@ -72,6 +72,16 @@ class Assign_location extends CI_Controller {
 		}
 	}
 	
+	function from_gc()
+	{
+		$item_id = $this->uri->segment(3,0);
+		$this->load->model('item');
+		$name = $this->item->get_name($item_id);
+		$this->show_location_assign_view($name);
+		
+		//echo $name;
+	}
+	
 	function find_item()
 	{
 		$this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean|max_length[50]|callback_item_exists');
@@ -86,38 +96,44 @@ class Assign_location extends CI_Controller {
 		else // passed validation proceed to post success logic
 		{
 			$name= $this->input->post('name');
-			$this->load->database();
-			$this->load->model('item');
-			$this->load->model('types');
-			
-			//$id = $this->item->getItemIdByName($name);
-			
-			$info = $this->item->getAllByName($name);
-			
-			$type_id = $info['type_id'];
-			$typeName = $this->types->get_name($type_id);			
-			$info['type_name'] = $typeName;
-
-			$this->load->model('location');
-			
-			//print_r($info);
-			if(!isset($info['lid']) || $info['lid']==NULL)
-			{
-				$info['lname']='Unassigned';
-			}
-			else
-			{
-				$info['lname'] = $this->location->get_location_name($info['lid']);
-			}
-		
-			$data['locations']  = $this->location->get_locations();
-			
-			$data['data'] = $info;
-			
-			$this->load->view('assign_location_view2',$data);
+			$this->show_location_assign_view($name);
 			//print_r($data);
 			//echo $name;
 		}
+	}
+	
+	function show_location_assign_view($name)
+	{
+		$this->load->database();
+		$this->load->model('item');
+		$this->load->model('types');
+		
+		//$id = $this->item->getItemIdByName($name);
+		
+		$info = $this->item->getAllByName($name);
+		
+		$type_id = $info['type_id'];
+		$typeName = $this->types->get_name($type_id);			
+		$info['type_name'] = $typeName;
+
+		$this->load->model('location');
+		
+		//print_r($info);
+		if(!isset($info['lid']) || $info['lid']==NULL)
+		{
+			$info['lname']='Unassigned';
+		}
+		else
+		{
+			$info['lname'] = $this->location->get_location_name($info['lid']);
+		}
+	
+		$data['locations']  = $this->location->get_locations();
+		
+		$data['data'] = $info;
+		
+		$this->load->view('assign_location_view2',$data);
+		
 	}
 	
 	function item_exists($name)
