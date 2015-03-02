@@ -38,12 +38,12 @@ class Locations extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('location');
-			$crud->set_primary_key('name');
+			//$crud->set_primary_key('name');
 			$crud->set_subject('Location');
 			$crud->field_type('description', 'textarea');
 			
-			$crud->required_fields('name');
-			$crud->set_rules('name','Name','trim|required|max_length[50]|xss_clean|alpha_dash||callback_location_exists');
+			//$crud->required_fields('name');
+			$crud->set_rules('name','Name','trim|required|max_length[50]|xss_clean|callback_location_exists');
 			$crud->set_rules('room_no','Room No','numeric|trim|xss_clean');
 			$crud->set_rules('description','Description','trim|xss_clean');
 			

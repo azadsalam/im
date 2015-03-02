@@ -87,7 +87,7 @@ class Item extends CI_Model {
 	    else 
 			return NULL; 
 	}
-	function set_location($id,$location)
+	function set_location_by_name($id,$location)
 	{	
 		$this->db->where('id',$id);
 		$this->db->set('lname',$location);
@@ -97,5 +97,17 @@ class Item extends CI_Model {
 		else 
 			return FALSE;
 	}
+	
+	function set_location($id,$lid)
+	{	
+		$this->db->where('id',$id);
+		$this->db->set('lid',$lid);
+		$q = $this->db->update('item');
+		if($this->db->affected_rows()==1)
+			return TRUE;
+		else 
+			return FALSE;
+	}
+	
 }
 ?>

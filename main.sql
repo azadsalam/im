@@ -14,6 +14,7 @@ CREATE TABLE types
      id INT NOT NULL AUTO_INCREMENT,
      name CHAR(30) NOT NULL,
 	 code CHAR(4) NOT NULL UNIQUE,
+	 count INT NOT NULL DEFAULT '0',
 	 description VARCHAR(255),
 	 pid INT,
      PRIMARY KEY (id),
@@ -23,15 +24,16 @@ CREATE TABLE types
 			ON UPDATE CASCADE
 );
 
-ALTER TABLE types ADD count INT NOT NULL DEFAULT '0' AFTER code;
+--ALTER TABLE types ADD count INT NOT NULL DEFAULT '0' AFTER code;
 --ALTER TABLE item ADD UNIQUE(name);
 
 CREATE TABLE location
 (
-	name CHAR(50) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+	name CHAR(50) NOT NULL UNIQUE,
 	room_no INT,
 	description VARCHAR(255),
-	PRIMARY KEY(name)
+	PRIMARY KEY(id)
 );
 
 CREATE TABLE item
@@ -42,26 +44,34 @@ CREATE TABLE item
 	make CHAR(50),
 	description VARCHAR(255),
 	purchase_date DATE,
-	lname CHAR(50),
+	lid INT,
 	PRIMARY KEY(id),
 	FOREIGN KEY (type_id)
 		REFERENCES types(id)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE,
-			
-	FOREIGN KEY (lname)
-		REFERENCES location(name)
+			ON UPDATE CASCADE,			
+	FOREIGN KEY (lid)
+		REFERENCES location(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 );
+
+CREATE TABLE person
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	name CHAR(50),
+	role CHAR(30),
+	PRIMARY KEY(id)
+);
+
 
 CREATE TABLE location_assignment_request
 (
 	id INT AUTO_INCREMENT,
 	item_id INT NOT NULL,
     pid INT NOT NULL,
-	old_location CHAR(50),
-	new_location CHAR(50),
+	old_location INT,
+	new_location INT,
 	status CHAR(50) NOT NULL DEFAULT 'PENDING',	
 	
     PRIMARY KEY(id),
@@ -76,27 +86,18 @@ CREATE TABLE location_assignment_request
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
     
-
-
 	FOREIGN KEY(old_location)
-		REFERENCES location(name)
+		REFERENCES location(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 			
 	FOREIGN KEY(new_location)
-		REFERENCES location(name)
+		REFERENCES location(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 	
 );
 
-CREATE TABLE person
-(
-	id INT NOT NULL AUTO_INCREMENT,
-	name CHAR(50),
-	role CHAR(30),
-	PRIMARY KEY(id)
-);
 
 
 CREATE TABLE loc_per
@@ -115,6 +116,6 @@ CREATE TABLE loc_per
 			ON UPDATE CASCADE
 );
 
-
+INSERT INTO `im`.`person` (`id`, `name`, `role`) VALUES ('1', 'admin', 'admin'), ('2', 'user', 'user');
 --INSERT INTO item(type_id,name,make, description) VALUES(1,'PC-1', 'HP', 'DEMO');
 --INSERT INTO `im`.`item` (`id`, `type_id`, `name`, `make`, `description`, `purchase_date`, `lname`) VALUES (NULL, '1', 'PC-2', 'HP', 'DEMO', '2014-12-11', NULL);

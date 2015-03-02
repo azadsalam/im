@@ -52,10 +52,11 @@ class Items_location extends CI_Controller {
 				$crud = new grocery_CRUD();
 				$crud->set_theme('datatables');
 				$crud->set_table('item');
-				$crud->required_fields('type_id','name','lname');
 				
+				$crud->required_fields('type_id','name','lid');
 				
-				$crud->where('lname',$lname);
+				$this->load->model('location');
+				$crud->where('lid',$this->location->get_location_id($lname));
 				$crud->unset_add();
 			
 				//if(get_priviledge_level() != 'admin')
@@ -63,7 +64,7 @@ class Items_location extends CI_Controller {
 				$crud->unset_edit();
 	            
 	            $crud->display_as('type_id','Type');
-	            $crud->display_as('lname','Location');
+	            $crud->display_as('lid','Location');
 	            
 				/*$crud->set_primary_key('name');
 				$crud->set_subject('Location');
@@ -76,7 +77,7 @@ class Items_location extends CI_Controller {
 	 			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 				
 				$crud->set_relation('type_id','types','name');
-				$crud->set_relation('lname','location','name');
+				$crud->set_relation('lid','location','name');
 	 			$output = $crud->render();
 	 			
 	 			$data['output']=$output;

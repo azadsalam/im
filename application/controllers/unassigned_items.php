@@ -38,10 +38,10 @@ class Unassigned_items extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('item');
-			$crud->required_fields('type_id','name','lname');
+			$crud->required_fields('type_id','name','lid');
 			
 			
-			$crud->where('lname',NULL);
+			$crud->where('lid',NULL);
 			$crud->unset_add();
 
 			//if(get_priviledge_level() != 'admin')
@@ -63,7 +63,7 @@ class Unassigned_items extends CI_Controller {
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
 			$crud->set_relation('type_id','types','name');
-			$crud->set_relation('lname','location','name');
+			//$crud->set_relation('lname','location','name');
  			$crud->columns('type_id','name','make','description','purchase_date');
 			$output = $crud->render();
 

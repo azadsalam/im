@@ -38,7 +38,7 @@ class Items extends CI_Controller {
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('item');
-			$crud->required_fields('type_id','name','lname');
+			$crud->required_fields('type_id','name','lid');
 			
 			
 //			$crud->where('lname','IAC-YO');
@@ -47,11 +47,11 @@ class Items extends CI_Controller {
 			//if(get_priviledge_level() != 'admin')
             $crud->unset_edit();
 
-            $crud->callback_column($this->unique_field_name('lname'),array($this,'blankFormatting'));
+            $crud->callback_column($this->unique_field_name('lid'),array($this,'blankFormatting'));
            // $crud->callback_column('lname',array($this,'blankFormatting'));
             
             $crud->display_as('type_id','Type');
-            $crud->display_as('lname','Location');
+            $crud->display_as('lid','Location');
             
 			/*$crud->set_primary_key('name');
 			$crud->set_subject('Location');
@@ -64,7 +64,7 @@ class Items extends CI_Controller {
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
 			
 			$crud->set_relation('type_id','types','name');
-			$crud->set_relation('lname','location','name');
+			$crud->set_relation('lid','location','name');
  			$output = $crud->render();
 
 			$this->load->view('items_view',$output);

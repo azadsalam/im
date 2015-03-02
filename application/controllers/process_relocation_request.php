@@ -37,14 +37,18 @@ class Process_relocation_request extends CI_Controller {
 		$res= $this->location_assignment_request->get_pending();
 		
 		$this->load->model('item');
+		$this->load->model('location');
+		
 		foreach ($res as &$row)
 		{
 			//$pid = $row['pid'];
 			$item_id = $row['item_id'];
 			$row['item_name'] = $this->item->get_name($item_id);
 			
-			if(!isset($row['old_location']))
-				$row['old_location'] = 'Unassigned';
+			if(!isset($row['old_location']))$row['old_location'] = 'Unassigned';
+			else $row['old_location'] = $this->location->get_location_name($row['old_location']);
+			
+			$row['new_location'] = $this->location->get_location_name($row['new_location']);
 		}
 		
 		$this->load->library('table');
@@ -57,27 +61,35 @@ class Process_relocation_request extends CI_Controller {
 	function approve()
 	{
 		$request_id = $this->input->post('request_id');	
-		//echo $request_id;
+		if(!isset($request_id) || $request_id==NULL)
+		{
+			redirect('process_relocation_request');	
+		}
+		
+		//echo 'hello'.$request_id;
 		
 		$this->load->model('location_assignment_request');
 		$this->load->model('item');
+		//$this->load->model('location');
 		
 		
 		$row = $this->location_assignment_request->get_row($request_id);
 		
 		//print_r($row);
 		
+		
 		$success = $this->item->set_location($row['item_id'],$row['new_location']);
 		
 		//if($success)
 		//{
-			if($this->location_assignment_request->approve($request_id))
-			{
-				$this->location_assignment_request->decline_all_pending($row['item_id']);
-				$this->index();
-			}
-			else 
-				$this->load->view('failure');
+		if($this->location_assignment_request->approve($request_id))
+		{
+			$this->location_assignment_request->decline_all_pending($row['item_id']);
+			//$this->index();
+			redirect('process_relocation_request');	
+		}
+		else 
+			$this->load->view('failure');
 		
 		/*else
 		{

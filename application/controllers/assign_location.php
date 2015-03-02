@@ -46,12 +46,16 @@ class Assign_location extends CI_Controller {
 		else // passed validation proceed to post success logic
 		{
 
+			$this->load->model('location');
 			$data['item_id'] = $this->input->post('item_id');
 			$data['pid'] = $this->session->userdata('pid');
 			$old_location = $this->input->post('old_location');
+			
 			if($old_location=='Unassigned')$old_location=NULL;
+			else $old_location =  $this->location->get_location_id($this->input->post('old_location'));
 			$data['old_location'] = $old_location;
-			$data['new_location'] = $this->input->post('new_location');
+			
+			$data['new_location'] = $this->location->get_location_id($this->input->post('new_location'));
 			$data['status'] = 'Pending';
 			
 			$this->load->model('location_assignment_request');
@@ -93,14 +97,19 @@ class Assign_location extends CI_Controller {
 			$type_id = $info['type_id'];
 			$typeName = $this->types->get_name($type_id);			
 			$info['type_name'] = $typeName;
+
+			$this->load->model('location');
 			
 			//print_r($info);
-			if(!isset($info['lname']) || $info['lname']==NULL)
+			if(!isset($info['lid']) || $info['lid']==NULL)
 			{
 				$info['lname']='Unassigned';
 			}
+			else
+			{
+				$info['lname'] = $this->location->get_location_name($info['lid']);
+			}
 		
-			$this->load->model('location');
 			$data['locations']  = $this->location->get_locations();
 			
 			$data['data'] = $info;

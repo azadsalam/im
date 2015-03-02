@@ -60,6 +60,18 @@ class Location extends CI_Model {
 		else return NULL;
 	}
 	
+	function get_location_id($name)
+	{
+		$this->db->select('id');
+		$query = $this->db->get_where('location', array('name' => $name));
+		return $query->row()->id;
+	}
+	function get_location_name($id)
+	{
+		$this->db->select('name');
+		$q = $this->db->get_where('location',array('id' => $id));
+		return $q->row()->name;
+	}
 
 	
 }
