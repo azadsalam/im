@@ -46,11 +46,22 @@ class Login extends CI_Controller {
 		}
 		else // passed validation proceed to post success logic
 		{
-			$un = $this->input->post('name');
-			$pass = $this->input->post('pass');
-
 			
-			if($un=='admin' && $pass=='RSAS')
+			
+			$username = $this->input->post('name');
+			$password = $this->input->post('pass');
+			$un=$username;
+			
+			
+			$this->load->library('Radius');
+			$ip_radius_server="172.16.101.11";
+			$shared_secret="testing123*cse";
+			$radius = new Radius($ip_radius_server, $shared_secret);
+			$result = $radius->AccessRequest($username, $password);
+			//print_r($result);
+			
+			
+			if($result)
 			{
 				$this->session->set_userdata('username',$un);
 				$this->session->set_userdata('priviledge','admin');
