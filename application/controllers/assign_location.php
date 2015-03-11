@@ -61,11 +61,15 @@ class Assign_location extends CI_Controller {
 			$this->load->model('location_assignment_request');
 			if($this->location_assignment_request->insert($data))
 			{
+				//echo "SUCCESSSSSSSS!!!!!!!!!!!!!!!!";
 				$data['msg'] = "Request Sent to Administrator!";
+				//redirect('unassigned_items');
 				$this->load->view('assign_location_view',$data);	
 			}
 			else 
 			{
+				
+				//redirect('unassigned_items');
 				$data['msg'] = "An unexpected error occured! Please Try Again After Sometime";
 				$this->load->view('assign_location_view',$data);
 			}
