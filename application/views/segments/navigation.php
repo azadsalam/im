@@ -32,46 +32,72 @@
                         </li>
                         -->
                         
-                        <li >
-                            <a class="active" href="<?=site_url('welcome');?>"><i class="fa fa-dashboard fa-fw"></i> Home</a>
-                        </li>
-                        <li>
-                            <a href="<?=site_url('locations');?>"><i class="fa fa-table fa-fw"></i> Manage Locations</a>
-                        </li>
-                        <li>
-                            <a href="<?=site_url('types');?>"><i class="fa fa-table fa-fw"></i> Manage Types</a>
-                        </li>
+                        <?php 
+                         $CI =& get_instance();
+                        $CI->load->helper('auth_helper');
+                        $priviledge = get_priviledge_level();	
+                        $pid = is_logged_in();
+                        ?>
                         
-                        <li>
-                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show All Items</a>
-                        </li>
-                        <li>
-                            <a href="<?=site_url('unassigned_items');?>"><i class="fa fa-table fa-fw"></i> Show Unassigned Items</a>
-                        </li>
-                        <li>
-                            <a href="<?=site_url('items_location');?>"><i class="fa fa-table fa-fw"></i> Items Per Location</a>
-                        </li>
-                     
-                        <li>
-                            <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
-                        </li>
                         
-                        <li>
-                            <a href="<?=site_url('assign_location');?>"><i class="fa fa-table fa-fw"></i> Assign Location to Item</a>
-                        </li>
+                        <?php
+                        if($pid!=false) 
+                        {
+                        ?>
                         
-                        <li>
-                            <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
-                        </li>
-                        
-                        <li>
-                            <a href="<?=site_url('persons');?>"><i class="fa fa-table fa-fw"></i> Manage Persons</a>
-                        </li>
-                        
-						<li>
-                            <a href="<?=site_url('login/logout');?>"><i class="fa fa-table fa-fw"></i> Log Out</a>
-                        </li>
-                        
+                        	
+	                        <li >
+	                            <a href="<?=site_url('welcome');?>"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+	                        </li>
+	                        
+	                        <li>
+	                            <a href="<?=site_url('locations');?>"><i class="fa fa-table fa-fw"></i> Manage Locations</a>
+	                        </li>
+	                        <li>
+	                            <a href="<?=site_url('types');?>"><i class="fa fa-table fa-fw"></i> Manage Types</a>
+	                        </li>
+	                        
+	                        <li>
+	                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show All Items</a>
+	                        </li>
+	                        <li>
+	                            <a href="<?=site_url('unassigned_items');?>"><i class="fa fa-table fa-fw"></i> Show Unassigned Items</a>
+	                        </li>
+	                        <li>
+	                            <a href="<?=site_url('items_location');?>"><i class="fa fa-table fa-fw"></i> Items Per Location</a>
+	                        </li>
+	                     
+	                        <li>
+	                            <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
+	                        </li>
+	                        
+	                        <li>
+	                            <a href="<?=site_url('assign_location');?>"><i class="fa fa-table fa-fw"></i> Assign Location to Item</a>
+	                        </li>
+	                        
+	                        <?php 
+							if($priviledge == 'admin' || $priviledge == 'superadmin')
+							{
+	                        ?>
+	                        <li>
+	                            <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
+	                        </li>
+	                        <?php 
+							}
+	                        ?>
+	                        <?php if($priviledge == 'superadmin'){?>
+	                        <li>
+	                            <a href="<?=site_url('persons');?>"><i class="fa fa-table fa-fw"></i> Manage Persons</a>
+	                        </li>
+	                        <?php }?>
+	                        
+							
+							
+							<li>
+	                            <a href="<?=site_url('login/logout');?>"><i class="fa fa-table fa-fw"></i> Log Out</a>
+	                        </li>
+                        <?php }?>
+ 
                         
 					
                     </ul>

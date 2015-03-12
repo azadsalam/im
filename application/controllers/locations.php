@@ -31,8 +31,7 @@ class Locations extends CI_Controller {
 	{
 		$this->load->helper('auth_helper');
 		redirect_if_not_logged_in();
-		
-		
+				
 		try
 		{
 			$crud = new grocery_CRUD();

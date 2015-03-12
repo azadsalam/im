@@ -12,7 +12,7 @@ class Process_relocation_request extends CI_Controller {
 		$priviledge = $this->session->userdata('priviledge');
 		
 		//echo $pid." ".$priviledge;
-		if($pid==false || $priviledge != 'admin')
+		if($pid==false || $priviledge == 'user')
 		{
 			//logged in
 			redirect('login'); 

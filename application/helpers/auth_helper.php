@@ -13,6 +13,12 @@ if ( ! function_exists('test_method'))
 		}
     }   
     
+    function is_logged_in()
+    {
+    	$CI = &get_instance();
+		$pid = $CI->session->userdata('pid');
+		return $pid;	
+	}
     function get_priviledge_level()
     {
     	$CI = &get_instance();

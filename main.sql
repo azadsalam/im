@@ -116,8 +116,8 @@ CREATE TABLE loc_per
 			ON UPDATE CASCADE
 );
 
-INSERT INTO person (name,role) VALUES ('headcse', 'admin'), ('azadsalam', 'admin');
-
+INSERT INTO person (name,role) VALUES ('headcse', 'superadmin');
+INSERT INTO `im`.`person` (`id`, `name`, `role`) VALUES (NULL, 'testadmin', 'admin'), (NULL, 'testuser', 'user');
 
 --INSERT INTO item(type_id,name,make, description) VALUES(1,'PC-1', 'HP', 'DEMO');
 --INSERT INTO `im`.`item` (`id`, `type_id`, `name`, `make`, `description`, `purchase_date`, `lname`) VALUES (NULL, '1', 'PC-2', 'HP', 'DEMO', '2014-12-11', NULL);

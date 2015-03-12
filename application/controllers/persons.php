@@ -14,7 +14,7 @@ class Persons extends CI_Controller {
 		$pid = $this->session->userdata('pid');
 		$priviledge = $this->session->userdata('priviledge');
 		//echo $priviledge;
-		if($pid==false || $priviledge != 'admin')
+		if($pid==false || $priviledge != 'superadmin')
 		{
 			//logged in
 			redirect('login'); 
@@ -54,7 +54,7 @@ class Persons extends CI_Controller {
 			//$crud->required_fields('name');
 			$crud->set_rules('name','Name','trim|required|xss_clean');
 			$crud->set_rules('role','Role','trim|xss_clean');
-			$crud->field_type('role','dropdown', array('admin' => 'admin', 'user' => 'user'));
+			$crud->field_type('role','dropdown', array('superadmin' => 'superadmin', 'admin' => 'admin', 'user' => 'user'));
 							
 			//$crud->columns('name','description');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
