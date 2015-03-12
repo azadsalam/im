@@ -64,6 +64,9 @@
                             <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
                         </li>
                         
+                        <li>
+                            <a href="<?=site_url('persons');?>"><i class="fa fa-table fa-fw"></i> Manage Persons</a>
+                        </li>
                         
 						<li>
                             <a href="<?=site_url('login/logout');?>"><i class="fa fa-table fa-fw"></i> Log Out</a>

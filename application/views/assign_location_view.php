@@ -6,9 +6,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                    
+        
                        <?php if(isset($msg))
-                    			echo $msg;
+                       {
+                       	?> 
+                               <div class="alert alert-info" role="alert">
+                    	<?php		echo $msg; ?>
+                    	</div> 
+                    	<?php 
+                       }
                     	?>
+                    
+                
+                    
                         <h1 class="page-header">Request Assignment of Item to a location</h1>
                         
                        

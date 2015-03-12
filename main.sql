@@ -52,14 +52,14 @@ CREATE TABLE item
 			ON UPDATE CASCADE,			
 	FOREIGN KEY (lid)
 		REFERENCES location(id)
-			ON DELETE CASCADE
-			ON UPDATE CASCADE
+			ON DELETE SET NULL
+			ON UPDATE SET NULL
 );
 
 CREATE TABLE person
 (
 	id INT NOT NULL AUTO_INCREMENT,
-	name CHAR(50),
+	name CHAR(50) UNIQUE NOT NULL ,
 	role CHAR(30),
 	PRIMARY KEY(id)
 );
@@ -88,8 +88,8 @@ CREATE TABLE location_assignment_request
     
 	FOREIGN KEY(old_location)
 		REFERENCES location(id)
-			ON DELETE CASCADE
-			ON UPDATE CASCADE,
+			ON DELETE SET NULL
+			ON UPDATE SET NULL,
 			
 	FOREIGN KEY(new_location)
 		REFERENCES location(id)
@@ -116,6 +116,8 @@ CREATE TABLE loc_per
 			ON UPDATE CASCADE
 );
 
-INSERT INTO `im`.`person` (`id`, `name`, `role`) VALUES ('1', 'admin', 'admin'), ('2', 'user', 'user');
+INSERT INTO person (name,role) VALUES ('headcse', 'admin'), ('azadsalam', 'admin');
+
+
 --INSERT INTO item(type_id,name,make, description) VALUES(1,'PC-1', 'HP', 'DEMO');
 --INSERT INTO `im`.`item` (`id`, `type_id`, `name`, `make`, `description`, `purchase_date`, `lname`) VALUES (NULL, '1', 'PC-2', 'HP', 'DEMO', '2014-12-11', NULL);
