@@ -50,7 +50,7 @@
 							<?php echo form_textarea( array( 'name' => 'description', 'rows' => '5', 'cols' => '80', 'value' => set_value('description') ) )?>
 						</p>
 						<p>
-						        <label for="purchase_date">Purchase Date</label>
+						        <label for="purchase_date">Purchase Date (YYYY-MM-DD)</label>
 						        <?php echo form_error('purchase_date'); ?>
 						        <br /><input id="purchase_date" type="text" name="purchase_date" value="<?php echo set_value('purchase_date'); ?>"  />
 						</p>

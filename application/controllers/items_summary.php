@@ -2,12 +2,15 @@
 
 class Items_summary extends CI_Controller {
 
-	public $lname='';
-	public $type_id='';
+	public $lname;
+	public $type_id;
 	public function __construct()
 	{
 		parent::__construct();
 
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
+		
 		$this->load->database();
 		$this->load->helper('url');
 
@@ -31,98 +34,37 @@ class Items_summary extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
+
 		
 		$this->load->helper('form');
 		$this->form_validation->set_rules('lname', 'Location', 'trim|xss_clean');				
 		$this->form_validation->set_rules('type_id','Type','trim|xss_clean');		
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 	
-		$this->lname = NULL;
-		$this->type_id = NULL;
-		if ($this->form_validation->run() == TRUE) // validation hasn't been passed
+		//$this->lname = NULL;
+		//$this->type_id = NULL;
+		if ($this->form_validation->run() == TRUE) 
 		{
 			$this->lname = $this->input->post('lname');
 			$this->type_id = $this->input->post('type_id');
 		}
 		
+		
+		if(!isset($this->lname) && !isset($this->type_id))
+		{
+			$this->load->view('items_summary_view');
+			return;
+		}
 		//echo $this->lname . ' <-> '.$this->type_id;
 
 //		echo $this->lname;
 //		$this->load->view('items_location_view_part1',array('lname'=>$lname));
  		//$data['output']=NULL;
-		$output=NULL;
-		try
-		{
-//			if(isset($this->lname))
-//			{
-				$crud = new grocery_CRUD();
-				$crud->set_theme('datatables');
-				$crud->set_table('item');
-				
-				$crud->required_fields('type_id','name','lid');
-				
-				
-				if(isset($this->lname) && !empty($this->lname))
-				{
-					if($this->lname == 'NO_LOCATION')
-					{
-						$crud->where('lid',NULL);
-					}
-					else 
-					{
-						$this->load->model('location');
-						$lid = $this->location->get_location_id($this->lname);
-						
-						$crud->where('lid',$lid);
-					}
-				}
-				
-				if(isset($this->type_id) && !empty($this->type_id)) 
-					$crud->where('type_id',$this->type_id);
-					//$crud->where('type_id',1);
-				$crud->unset_add();
+	
+		
+			$this->load->view('items_summary_view');
 			
-				//if(get_priviledge_level() != 'admin')
-            	
-				$crud->unset_edit();
-	            
-	            $crud->display_as('type_id','Type');
-	            $crud->display_as('lid','Location');
-	            
-				/*$crud->set_primary_key('name');
-				$crud->set_subject('Location');
-				$crud->field_type('description', 'textarea');
-				
-				$crud->set_rules('name','Name','trim|required|max_length[50]|xss_clean|alpha_dash||callback_location_exists');
-				$crud->set_rules('room_no','Room No','numeric|trim|xss_clean');
-				*/
-				//$crud->columns('name','description');
-	 			//$crud->callback_add_field('name',array($this,'add_name_callback'));
-	            $crud->callback_column($this->unique_field_name('lid'),array($this,'blankFormatting'));
-	            
-				$crud->set_relation('type_id','types','name');
-				$crud->set_relation('lid','location','name');
-	 			$crud->add_action('Assign Location', '', 'assign_location/from_gc','ui-icon-image');
-				
-	 			$output = $crud->render();
-	 			
-	 			$data['output']=$output;
-//			}
-			
-			//print_r($output);
-			//$output['location_list']=array(1,2,3);
-			
-
-			$this->load->view('items_location_view',$output);
-			
-		}
-		catch(Exception $e)
-		{
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-			$this->load->view('items_view',(object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
-		}
+		
 		
 	}
 	function unique_field_name($field_name) 

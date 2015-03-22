@@ -5,7 +5,10 @@ class Unassigned_items extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-
+	
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
+		
 		$this->load->database();
 		$this->load->helper('url');
 
@@ -29,8 +32,7 @@ class Unassigned_items extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
+		
 		
 		
 		try

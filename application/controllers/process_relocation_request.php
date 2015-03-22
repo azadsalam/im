@@ -6,13 +6,10 @@ class Process_relocation_request extends CI_Controller {
 	{
 		parent::__construct();
 		
-		
-		$pid = $this->session->userdata('pid');
-		
-		$priviledge = $this->session->userdata('priviledge');
-		
+		$this->load->helper('auth_helper');
+	
 		//echo $pid." ".$priviledge;
-		if($pid==false || $priviledge == 'user')
+		if(!is_admin_or_super_admin())
 		{
 			//logged in
 			redirect('login'); 
@@ -41,10 +38,17 @@ class Process_relocation_request extends CI_Controller {
 		
 		$this->load->model('item');
 		$this->load->model('location');
+		$this->load->model('person');		
 		
 		foreach ($res as &$row)
 		{
-			//$pid = $row['pid'];
+			//print_r($row);
+			//echo "<br/>";
+			
+			$pid = $row['pid'];
+			$name = $this->person->get_full_name($pid)->full_name;
+			
+			$row['full_name'] = $name;
 			$item_id = $row['item_id'];
 			$row['item_name'] = $this->item->get_name($item_id);
 			

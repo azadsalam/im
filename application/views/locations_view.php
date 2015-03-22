@@ -2,7 +2,7 @@
 <?php $this->load->view('segments/navigation')?>
  <div id="page-wrapper">                        
  <h3>Manage Locations</h3>
- <div class="alert alert-danger" role="alert">No spaces are allowed in location name</div>
+ <!-- <div class="alert alert-danger" role="alert">No spaces are allowed in location name</div>  -->
         
                      	<?php echo $output; ?>
                 </div> 

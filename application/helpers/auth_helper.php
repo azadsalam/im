@@ -7,6 +7,7 @@ if ( ! function_exists('test_method'))
 		
 		$CI = &get_instance();
 		$pid = $CI->session->userdata('pid');
+		
 		if($pid == false)
 		{
 			redirect('login');
@@ -23,5 +24,16 @@ if ( ! function_exists('test_method'))
     {
     	$CI = &get_instance();
 		return $CI->session->userdata('priviledge');
+    }
+    
+    function is_admin_or_super_admin()
+    {
+    	if(!is_logged_in()) return false;
+        $CI = &get_instance();
+		$pid = $CI->session->userdata('pid');
+		$pri = $CI->session->userdata('priviledge');
+		if($pri=='admin' || $pri == 'superadmin') return true;
+		
+		else return false;
     }
 }

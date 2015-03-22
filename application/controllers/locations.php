@@ -4,8 +4,19 @@ class Locations extends CI_Controller {
 
 	public function __construct()
 	{
+		
 		parent::__construct();
 
+		$this->load->helper('auth_helper');
+
+	
+		//echo $pid." ".$priviledge;
+		if(!is_admin_or_super_admin())
+		{
+			//logged in
+			redirect('login'); 
+		}
+		
 		$this->load->database();
 		$this->load->helper('url');
 
@@ -29,9 +40,7 @@ class Locations extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
-				
+	
 		try
 		{
 			$crud = new grocery_CRUD();

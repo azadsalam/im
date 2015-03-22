@@ -22,6 +22,13 @@ class Person extends CI_Model {
 		$query = $this->db->get_where('person', array('name' => $name));
 		return $query->row();
 	}
+	
+	function get_full_name($id)
+	{
+		$this->db->select('full_name');
+		$query = $this->db->get_where('person', array('id' => $id));
+		return $query->row();
+	}
 
 	
 }

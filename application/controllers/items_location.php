@@ -2,12 +2,15 @@
 
 class Items_location extends CI_Controller {
 
-	public $lname='';
-	public $type_id='';
+	public $lname;
+	public $type_id;
 	public function __construct()
 	{
 		parent::__construct();
 
+		$this->load->helper('auth_helper');
+		redirect_if_not_logged_in();
+		
 		$this->load->database();
 		$this->load->helper('url');
 
@@ -31,22 +34,27 @@ class Items_location extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
+
 		
 		$this->load->helper('form');
 		$this->form_validation->set_rules('lname', 'Location', 'trim|xss_clean');				
 		$this->form_validation->set_rules('type_id','Type','trim|xss_clean');		
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 	
-		$this->lname = NULL;
-		$this->type_id = NULL;
-		if ($this->form_validation->run() == TRUE) // validation hasn't been passed
+		//$this->lname = NULL;
+		//$this->type_id = NULL;
+		if ($this->form_validation->run() == TRUE) 
 		{
 			$this->lname = $this->input->post('lname');
 			$this->type_id = $this->input->post('type_id');
 		}
 		
+		
+		if(!isset($this->lname) && !isset($this->type_id))
+		{
+			$this->load->view('items_location_view');
+			return;
+		}
 		//echo $this->lname . ' <-> '.$this->type_id;
 
 //		echo $this->lname;

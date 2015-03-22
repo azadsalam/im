@@ -6,6 +6,14 @@ class Types extends CI_Controller {
 	{
 		parent::__construct();
 
+		$this->load->helper('auth_helper');
+	
+		//echo $pid." ".$priviledge;
+		if(!is_admin_or_super_admin())
+		{
+			//logged in
+			redirect('login'); 
+		}
 		$this->load->database();
 		$this->load->helper('url');
 
@@ -29,9 +37,7 @@ class Types extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
-		
+
 		
 		try
 		{
@@ -47,10 +53,12 @@ class Types extends CI_Controller {
 			$crud->set_rules('description','Description','trim|xss_clean');
 			$crud->set_relation('pid','types','name');
 			
-			$crud->columns('name','code','count','description','pid');
+			$crud->columns('name','code','description','pid');
 			//$crud->columns('id','name','code','count','description','pid');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
+			$crud->add_fields('name','code','description','pid');
 			
+			$crud->unset_read('count');
 			$crud->unset_edit();
  			$output = $crud->render();
 

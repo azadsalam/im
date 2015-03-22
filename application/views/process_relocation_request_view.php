@@ -27,7 +27,7 @@
 								?>
 								<tr>
 								<td><?php echo $row['item_name'];?></td>
-								<td><?php echo $row['pid'];?></td>
+								<td><?php echo $row['full_name'];?></td>
 								<td><?php echo $row['old_location'];?></td>
 								<td><?php echo $row['new_location'];?></td>
 								<td><?php echo $row['status'];?></td>

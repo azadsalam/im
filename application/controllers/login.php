@@ -70,7 +70,7 @@ class Login extends CI_Controller {
 				$pid = $data->id;
 				$role = $data->role;
 				//echo "ROLL->".$role;
-				if(isset($data) && isset($role) && !empty($role))
+				if(isset($data) && isset($role) && !empty($role) )
 				{
 			
 					$this->session->set_userdata('username',$username);

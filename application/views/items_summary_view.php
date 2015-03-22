@@ -21,7 +21,7 @@
  </h3>
 <?php  
 //echo form_open('items_location',array('method'=>'get'));
-echo form_open('items_location',"class='form-inline'");
+echo form_open('items_summary',"class='form-inline'");
 $CI =& get_instance();
 $locations = $CI->get_locations();
 //print_r($locations);
@@ -37,9 +37,7 @@ echo form_submit('mysubmit', 'Show Items',"class ='btn btn-success'");
 echo form_close();
 ?>
 
-<?php  if(isset($output))
- print_r($output); ?>
-</div> 
+
 
 
 <?php //$this->load->view('segments/footer')?>

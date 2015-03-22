@@ -49,13 +49,7 @@
 	                        <li >
 	                            <a href="<?=site_url('welcome');?>"><i class="fa fa-dashboard fa-fw"></i> Home</a>
 	                        </li>
-	                        
-	                        <li>
-	                            <a href="<?=site_url('locations');?>"><i class="fa fa-table fa-fw"></i> Manage Locations</a>
-	                        </li>
-	                        <li>
-	                            <a href="<?=site_url('types');?>"><i class="fa fa-table fa-fw"></i> Manage Types</a>
-	                        </li>
+	                       
 	                        
 	                        <li>
 	                            <a href="<?=site_url('items');?>"><i class="fa fa-table fa-fw"></i> Show All Items</a>
@@ -79,9 +73,19 @@
 							if($priviledge == 'admin' || $priviledge == 'superadmin')
 							{
 	                        ?>
+                            
 	                        <li>
 	                            <a href="<?=site_url('process_relocation_request');?>"><i class="fa fa-table fa-fw"></i> Process Relocation Request</a>
 	                        </li>
+	                        
+	                        <li>
+	                            <a href="<?=site_url('locations');?>"><i class="fa fa-table fa-fw"></i> Manage Locations</a>
+	                        </li>
+	                        <li>
+	                            <a href="<?=site_url('types');?>"><i class="fa fa-table fa-fw"></i> Manage Types</a>
+	                        </li>
+	                        
+	                        
 	                        <?php 
 							}
 	                        ?>

@@ -8,7 +8,14 @@ class Create_location extends CI_Controller
 		parent::__construct();
 		
 		$this->load->helper('auth_helper');
-		redirect_if_not_logged_in();
+
+		//echo $pid." ".$priviledge;
+		if(!is_admin_or_super_admin())
+		{
+			//logged in
+			redirect('login'); 
+		}
+		
 		//echo $pid;
 	}
 

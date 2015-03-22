@@ -63,7 +63,7 @@ CREATE TABLE person
 	role CHAR(30),
 	PRIMARY KEY(id)
 );
-
+ALTER TABLE `person` ADD `full_name` VARCHAR( 50 ) NOT NULL AFTER `name`;
 
 CREATE TABLE location_assignment_request
 (
