@@ -69,6 +69,7 @@ class Items_location extends CI_Controller {
 				$crud->set_theme('datatables');
 				$crud->set_table('item');
 				
+				
 				$crud->required_fields('type_id','name','lid');
 				
 				
@@ -95,6 +96,7 @@ class Items_location extends CI_Controller {
 				//if(get_priviledge_level() != 'admin')
             	
 				$crud->unset_edit();
+	            $crud->unset_print();
 	            
 	            $crud->display_as('type_id','Type');
 	            $crud->display_as('lid','Location');
@@ -132,7 +134,9 @@ class Items_location extends CI_Controller {
 			$this->load->view('items_view',(object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 		}
 		
+		
 	}
+	
 	function unique_field_name($field_name) 
 	{
 	    return 's'.substr(md5($field_name),0,8); //This s is because is better for a string to begin with a letter and not with a number

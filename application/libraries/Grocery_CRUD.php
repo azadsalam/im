@@ -478,6 +478,11 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 	 */
 	public $basic_model = null;
 
+	public function gimme() {
+    
+    	return $this->getStateCode();
+    }
+    
 	protected function set_default_Model()
 	{
 		$ci = &get_instance();
@@ -5573,5 +5578,7 @@ class UploadHandler
         header('Content-type: application/json');
         echo json_encode($success);
     }
+    
+	
 
 }

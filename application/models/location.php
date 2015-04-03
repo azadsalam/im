@@ -58,6 +58,27 @@ class Location extends CI_Model {
 			return $data;
 		}
 		else return NULL;
+	
+	}
+	
+	function get_floors()
+	{
+		$this->db->select('floor');
+		$this->db->distinct();
+		$this->db->order_by('floor','asc');
+		//$this->db->where("floor IS NOT NULL");
+		$q = $this->db->get('location');
+		if($q->num_rows()>0)
+		{
+			foreach($q->result() as $row)
+			{
+				$data[$row->floor] = $row->floor;
+			}
+			return $data;
+			
+		}
+		else return NULL;
+		
 	}
 	
 	function get_location_id($name)

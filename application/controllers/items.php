@@ -47,6 +47,7 @@ class Items extends CI_Controller {
 			
 			//if(get_priviledge_level() != 'admin')
             $crud->unset_edit();
+            $crud->unset_print();
 
             $crud->callback_column($this->unique_field_name('lid'),array($this,'blankFormatting'));
            // $crud->callback_column('lname',array($this,'blankFormatting'));
@@ -65,6 +66,7 @@ class Items extends CI_Controller {
 			
             $crud->columns('name','type_id','make','purchase_date','lid','description');
             
+                       
 			$crud->set_relation('type_id','types','name');
 			$crud->set_relation('lid','location','name');
  			$output = $crud->render();

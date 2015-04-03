@@ -36,6 +36,7 @@ CREATE TABLE location
 	PRIMARY KEY(id)
 );
 
+
 CREATE TABLE item
 (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -63,7 +64,6 @@ CREATE TABLE person
 	role CHAR(30),
 	PRIMARY KEY(id)
 );
-ALTER TABLE `person` ADD `full_name` VARCHAR( 50 ) NOT NULL AFTER `name`;
 
 CREATE TABLE location_assignment_request
 (
@@ -115,6 +115,10 @@ CREATE TABLE loc_per
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 );
+
+ALTER TABLE `person` ADD `full_name` VARCHAR( 50 ) NOT NULL AFTER `name`;
+ALTER TABLE location ADD column floor INTEGER;
+
 
 INSERT INTO person (name,role) VALUES ('headcse', 'superadmin');
 INSERT INTO `im`.`person` (`id`, `name`, `role`) VALUES (NULL, 'testadmin', 'admin'), (NULL, 'testuser', 'user');

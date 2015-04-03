@@ -10,12 +10,12 @@
  
  if(isset($output))
  {
- 	echo "Showing Type: ".$type_name;
+ 	echo "Filter- Showing Type: ".$type_name;
  	if(isset($lname) && !empty($lname)) echo " from Location: ". $lname;
  }
  else 
  {
- 	echo "Select Type and Location";
+ 	echo "Filter Items";
  }
  ?>
  </h3>
@@ -33,7 +33,7 @@ echo "</div>";
 echo " <div class=\"form-group\">";
 echo '  <label for="lname">Location</label> '.form_dropdown('lname', $locations, $lname);
 echo "</div> ";
-echo form_submit('mysubmit', 'Show Items',"class ='btn btn-success'");
+echo form_submit('mysubmit', 'Filter',"class ='btn btn-success'");
 echo form_close();
 ?>
 

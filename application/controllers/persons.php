@@ -58,7 +58,7 @@ class Persons extends CI_Controller {
 							
 			//$crud->columns('name','description');
  			//$crud->callback_add_field('name',array($this,'add_name_callback'));
-			
+			           $crud->unset_print();
  			$output = $crud->render();
 
 			$this->load->view('persons_view',$output);

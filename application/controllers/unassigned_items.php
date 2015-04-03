@@ -72,6 +72,7 @@ class Unassigned_items extends CI_Controller {
  			
  			$crud->add_action('Assign Location', '', 'assign_location/from_gc','ui-icon-image');
  			
+ 			$crud->unset_print();
 			$output = $crud->render();
 
 			$this->load->view('unassigned_items_view',$output);
