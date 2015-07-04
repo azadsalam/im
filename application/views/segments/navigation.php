@@ -64,6 +64,10 @@
 	                        <li>
 	                            <a href="<?=site_url('item_entry');?>"><i class="fa fa-table fa-fw"></i> Entry Item</a>
 	                        </li>
+                                
+                                <li>
+	                            <a href="<?=site_url('item_with_location');?>"><i class="fa fa-table fa-fw"></i> Entry Item with Location</a>
+	                        </li>
 	                        
 	                        <li>
 	                            <a href="<?=site_url('assign_location');?>"><i class="fa fa-table fa-fw"></i> Assign Location to Item</a>

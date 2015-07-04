@@ -39,6 +39,7 @@ class Item extends CI_Model {
 		return NULL;
 	}
 	
+        
 	/*function itemsInLocation($locationId)
 	{
 		$this->db->select('id','type_id','');
